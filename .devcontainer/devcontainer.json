@@ -3,7 +3,9 @@
 {
 	"name": "Project E-Commerce",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "ecommerce-app",
+	"workspaceFolder": "/workspaces/ecommerce",
 
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {
@@ -12,7 +14,7 @@
 			"installGradle": "false"
 		}
 	},
-	"forwardPorts": [8888],
+	// "forwardPorts": [8888],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -29,7 +31,8 @@
 				"pkief.material-icon-theme",
 				"eamodio.gitlens",
 				"ms-azuretools.vscode-docker",
-				"ms-ossdata.vscode-postgresql"
+				"ms-ossdata.vscode-postgresql",
+				"mongodb.mongodb-vscode"
 			]
 		}
 	}

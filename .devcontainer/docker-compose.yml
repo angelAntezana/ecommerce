@@ -1,0 +1,25 @@
+version: '3'
+services:
+  ecommerce-app:
+    image: mcr.microsoft.com/devcontainers/java:1-21-bookworm
+    volumes:
+      - ../:/workspaces/ecommerce
+    command: sleep infinity
+  mongodbecommerce:
+    image: mongo
+    container_name: mongo_db_ecommerce
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongoecommerce:/data
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+
+volumes:
+  mongoecommerce:
+
+networks:
+  microservices:
+    driver: bridge
