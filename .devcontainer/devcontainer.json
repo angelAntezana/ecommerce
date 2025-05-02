@@ -32,7 +32,8 @@
 				"eamodio.gitlens",
 				"ms-azuretools.vscode-docker",
 				"ms-ossdata.vscode-postgresql",
-				"mongodb.mongodb-vscode"
+				"mongodb.mongodb-vscode",
+				"42crunch.vscode-openapi"
 			]
 		}
 	}

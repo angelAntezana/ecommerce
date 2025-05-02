@@ -10,6 +10,15 @@
 	<artifactId>customer-microservice</artifactId>
 	<name>customer-microservice</name>
 	<description>Customer microservice</description>
+	<properties>
+		<openapi-generator.version>7.4.0</openapi-generator.version>
+		<project.dir>src/main/java/com/aeas/microservices</project.dir>
+		<module.name>customer_microservice</module.name>
+		<yaml.name>api_ms_customer.yml</yaml.name>
+		<swagger.annotations.version>2.2.8</swagger.annotations.version>
+		<jackson-nullable.version>0.2.6</jackson-nullable.version>
+		<jakarta.validation.version>3.0.2</jakarta.validation.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -21,6 +30,28 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--OPEN API DOCUMENTATION-->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+		<!--GENERATE OPENAPI-->
+		<dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+			<version>${jakarta.validation.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.annotations.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${jackson-nullable.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -29,6 +60,41 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			          <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-api-code</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+							<modelNameSuffix>DTO</modelNameSuffix>
+                            <inputSpec>${project.basedir}/${project.dir}/${module.name}/openapi/${yaml.name}</inputSpec>
+                            <generatorName>spring</generatorName>
+							<apiPackage>com.aeas.microservices.${module.name}.web.controller.interfaces</apiPackage>
+                			<modelPackage>com.aeas.microservices.${module.name}.web.model.dto</modelPackage>
+                            <strictSpec>true</strictSpec>
+                            <generateApiTests>false</generateApiTests>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <configOptions>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<useSpringBoot3>true</useSpringBoot3>
+								<java8>false</java8>
+								<useJakartaEe>true</useJakartaEe>
+				                <delegatePattern>false</delegatePattern>			
+                                <interfaceOnly>true</interfaceOnly>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                                <useBeanValidation>true</useBeanValidation>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
