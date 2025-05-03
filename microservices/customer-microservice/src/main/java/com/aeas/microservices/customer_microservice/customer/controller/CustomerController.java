@@ -1,40 +1,55 @@
 package com.aeas.microservices.customer_microservice.customer.controller;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aeas.microservices.customer_microservice.customer.service.CustomerService;
 import com.aeas.microservices.customer_microservice.web.controller.interfaces.CustomerApi;
 import com.aeas.microservices.customer_microservice.web.model.dto.CustomerDTO;
+import com.aeas.microservices.customer_microservice.web.model.dto.PostRequestCustomerDTO;
+import com.aeas.microservices.customer_microservice.web.model.dto.PostResponseCustomerDTO;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
+
 
 @RestController
-@RequestMapping("v1/customer")
+@RequestMapping("api/v1/")
+@RequiredArgsConstructor
 public class CustomerController implements CustomerApi{
 
+    private final CustomerService customerService;
+
     @Override
-    public ResponseEntity<CustomerDTO> createCustomer(@Valid CustomerDTO customerDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createCustomer'");
+    public PostResponseCustomerDTO createCustomer(@Valid PostRequestCustomerDTO postRequestCustomerDTO) {
+        return customerService.createCustomer(postRequestCustomerDTO);
     }
 
     @Override
-    public ResponseEntity<Void> deleteCustomer(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteCustomer'");
+    public void deleteCustomer(String id) {
+        customerService.deleteCustomer(id);
     }
 
     @Override
-    public ResponseEntity<CustomerDTO> getCustomerByfirstName(String firstName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCustomerByfirstName'");
+    public CustomerDTO getCustomerById(String id) {
+        return customerService.getCustomerById(id);
     }
 
     @Override
-    public ResponseEntity<Void> updateCustomer(String firstName, @Valid CustomerDTO customerDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCustomer'");
+    public List<CustomerDTO> getCustomers() {
+        return customerService.getCustomers();
     }
+
+    @Override
+    public void updateCustomer(String id, @Valid CustomerDTO customerDTO) {
+        customerService.updateCustomer(id, customerDTO);
+    }
+
+
+
+
     
 }

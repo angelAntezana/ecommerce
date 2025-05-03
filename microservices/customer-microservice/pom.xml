@@ -93,6 +93,7 @@
 								<useSpringBoot3>true</useSpringBoot3>
 								<java8>false</java8>
 								<useJakartaEe>true</useJakartaEe>
+								<useResponseEntity>false</useResponseEntity>
 				                <delegatePattern>false</delegatePattern>			
                                 <interfaceOnly>true</interfaceOnly>
                                 <skipDefaultInterface>true</skipDefaultInterface>
@@ -108,15 +109,22 @@
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-compiler-plugin</artifactId>
 			<version>3.11.0</version>
-			<configuration>
-				<annotationProcessorPaths>
-					<path>
-						<groupId>org.mapstruct</groupId>
-						<artifactId>mapstruct-processor</artifactId>
-						<version>1.6.0.Beta1</version>
-					</path>
-				</annotationProcessorPaths>
-			</configuration>
+	  <configuration>
+	   		<source>21</source>
+            <target>21</target>
+			<annotationProcessorPaths>
+			<path>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct-processor</artifactId>
+				<version>1.6.0.Beta1</version>
+			</path>
+			<path>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.30</version>
+			</path>
+			</annotationProcessorPaths>
+		</configuration>
 		</plugin>
 		</plugins>
 	</build>
